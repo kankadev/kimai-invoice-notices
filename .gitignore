@@ -6,3 +6,4 @@
 /var/
 /coverage/
 *.log
+/dist/

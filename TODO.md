@@ -1,41 +1,22 @@
 # Roadmap
 
-Target backlog. Checked items have implementation evidence; unchecked items remain open.
+## Version one
 
-## First development slice — 2026-10-11
-
-- [x] Native bundle registration, read-only administrator overview, English/German labels.
-- [x] Validated plain-text profile model with stable identifiers and ordered blocks.
-- [x] Native customer choice field; re-registration preserves the selected identifier.
-- [x] Invoice-model hydrator uses the effective document formatter locale.
-- [x] Missing translations and inactive/missing selected profiles do not silently resolve.
-- [x] 17 domain checks and 9 native integration checks in isolated Kimai 2.67.0 / PHP 8.3.
-- [x] German/English HTTP overview, login guard, read-only method restriction and customer field checked.
-- [x] Profile editor, content-language discovery, explicit language addition and retained languages.
-- [x] Native form validation, CSRF, restricted-role access, stale-edit rejection and storage limits.
-- [x] Current test totals: 20 domain checks and 14 native integration checks; HTTP editor acceptance.
-- [ ] Historical snapshots, PDF placement and Kimai 2.69 compatibility.
-
-## Before implementation
-
-- [ ] Confirm supported Kimai versions and native metadata/model extension behavior.
-- [ ] Finalize profile schema, template variable contract, language fallback, and missing-profile policy.
-- [ ] Decide how an individual invoice can override its customer's default profile.
-- [ ] Prove a safe hook for invoice text snapshots and define historical re-render semantics.
-- [ ] Decide profile-history retention, deletion, migration, and uninstall behavior.
-
-## First implementation
-
-- [x] Profile administration with English/German interface translations.
-- [x] Localized short notices and ordered long blocks.
-- [x] Customer profile selection through native metadata.
-- [x] Language discovery, explicit language addition, and missing-translation guidance.
-- [ ] Native invoice model integration and example template instructions.
-- [ ] Validation, authorization, concurrency checks, and optional explicit consistency constraints.
-- [ ] Automated tests and isolated renderer acceptance with synthetic fixtures.
-- [ ] Installation, upgrade, recovery, and operator documentation before any release.
+- [x] Native bundle/menu, multilingual administration and customer choice.
+- [x] Plain-text validated profiles, stable IDs, revisions and ordered blocks.
+- [x] Language discovery, retained/manual translations and exact document locale.
+- [x] Native form validation, CSRF/access checks, stale-write protection and bounded storage.
+- [x] Per-export batch-wide exception, customer defaults preserved.
+- [x] Native snapshot persistence, immutable history and document provenance.
+- [x] Narrow native Twig sandbox integration and template instructions.
+- [x] Domain/native/sandbox suites and actual-renderer synthetic PDF acceptance.
+- [x] English/German operator, installation, recovery and security documentation.
+- [x] Deterministic release archive, checksum and tagged publication workflow; archive installation checked in staging.
 
 ## Deferred
 
-- External offer profile export/API: revisit only when duplicate text maintenance becomes a concrete problem. No prospect-to-Kimai requirement.
-- Financial calculations, tax determination, discounts, recurring bookings, and email delivery: outside this plugin's scope.
+- Larger dedicated storage and explicit migration only if the documented aggregate limit becomes a real constraint.
+- Profile deletion/retention tooling, preserving historical invoice snapshots.
+- Optional authenticated read-only profile export API for external systems; no requirement to create prospects as customers.
+- Other host versions need their own compatibility acceptance.
+- Tax determination, financial calculations, discounts, recurring bookings and mail delivery are outside this plugin.

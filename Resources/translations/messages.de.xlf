@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2"><file source-language="en" target-language="de" datatype="plaintext" original="messages"><body>
 <trans-unit id="title"><source>kanka_notices.title</source><target>Rechnungshinweise</target></trans-unit>
-<trans-unit id="development"><source>kanka_notices.development</source><target>Entwicklungsvorschau: Historische Textstände und PDF-Abnahme stehen noch aus. Nicht produktiv einsetzen.</target></trans-unit>
+<trans-unit id="template_setup"><source>kanka_notices.template_setup</source><target>Die native Rechnungsvorlage muss die Hinweisvariablen ausgeben. Einmalig integrieren und vor der Abrechnung eine tatsächliche PDF-Vorschau prüfen.</target></trans-unit>
 <trans-unit id="profiles"><source>kanka_notices.profiles</source><target>Hinweisprofile</target></trans-unit>
 <trans-unit id="boundaries"><source>kanka_notices.boundaries</source><target>Hinweise erläutern die Rechnung. Sie berechnen keine Steuern, Rabatte oder Rechnungsbeträge.</target></trans-unit>
 <trans-unit id="revision"><source>kanka_notices.revision</source><target>Revision</target></trans-unit>
@@ -41,4 +41,12 @@
 <trans-unit id="storage_limit"><source>kanka_notices.storage_limit</source><target>Die Profile überschreiten die aktuelle Speichergrenze von 60.000 UTF-8-Bytes. Kürze die Texte vor dem Speichern. Es wurden keine Änderungen gespeichert.</target></trans-unit>
 <trans-unit id="storage_usage"><source>kanka_notices.storage_usage</source><target>Profilspeicher: %used% / %limit% UTF-8-Bytes</target></trans-unit>
 <trans-unit id="no_translations"><source>kanka_notices.no_translations</source><target>Keine Übersetzung aktiviert. Hinterlege die benötigte Rechnungssprache, bevor du dieses Profil zuordnest.</target></trans-unit>
+<trans-unit id="use_customer"><source>kanka_notices.use_customer</source><target>Zugeordnetes Profil des jeweiligen Kunden verwenden</target></trans-unit>
+<trans-unit id="without_notices"><source>kanka_notices.without_notices</source><target>Keine Hinweise für diese Rechnung</target></trans-unit>
+<trans-unit id="invoice_override"><source>kanka_notices.invoice_override</source><target>Hinweisprofil für diese Abrechnung</target></trans-unit>
+<trans-unit id="invoice_override_help"><source>kanka_notices.invoice_override_help</source><target>Gilt für alle Rechnungen aus dieser Auswahl. Die Kundeneinstellung bleibt unverändert. Vor dem Speichern die PDF-Vorschau prüfen. Eine Ausnahme nicht als Standardsuche speichern.</target></trans-unit>
+<trans-unit id="profile_unavailable"><source>kanka_notices.profile_unavailable</source><target>Das gewählte Hinweisprofil fehlt oder seine Konfiguration ist ungültig. Bitte die Einstellungen von Rechnungshinweise durch einen Administrator prüfen lassen oder für diese Abrechnung ein anderes Profil wählen.</target></trans-unit>
+<trans-unit id="profile_inactive"><source>kanka_notices.profile_inactive</source><target>Hinweisprofil „%name%“ ist inaktiv. In Rechnungshinweise reaktivieren oder für diese Abrechnung ein anderes Profil wählen.</target></trans-unit>
+<trans-unit id="translation_missing"><source>kanka_notices.translation_missing</source><target>Hinweisprofil „%name%“ hat keine aktive Übersetzung für die Dokumentsprache %language%. In Rechnungshinweise ergänzen oder für diese Abrechnung ein passendes Profil wählen.</target></trans-unit>
+<trans-unit id="snapshot_immutable"><source>kanka_notices.snapshot_immutable</source><target>Die mit dieser Rechnung gespeicherten Hinweise dürfen nicht verändert werden. Eine korrigierte Rechnung über den üblichen Buchhaltungsablauf erstellen.</target></trans-unit>
 </body></file></xliff>

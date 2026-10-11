@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2"><file source-language="en" target-language="en" datatype="plaintext" original="messages"><body>
 <trans-unit id="title"><source>kanka_notices.title</source><target>Invoice Notices</target></trans-unit>
-<trans-unit id="development"><source>kanka_notices.development</source><target>Development preview: historical snapshots and PDF acceptance are still pending. Do not use in production.</target></trans-unit>
+<trans-unit id="template_setup"><source>kanka_notices.template_setup</source><target>Your native invoice template must display the notice variables. Integrate it once and verify an actual PDF preview before invoicing.</target></trans-unit>
 <trans-unit id="profiles"><source>kanka_notices.profiles</source><target>Notice profiles</target></trans-unit>
 <trans-unit id="boundaries"><source>kanka_notices.boundaries</source><target>Notices explain your invoice. They do not calculate taxes, discounts or invoice amounts.</target></trans-unit>
 <trans-unit id="revision"><source>kanka_notices.revision</source><target>Revision</target></trans-unit>
@@ -41,4 +41,12 @@
 <trans-unit id="storage_limit"><source>kanka_notices.storage_limit</source><target>The profiles exceed the current storage limit of 60,000 UTF-8 bytes. Shorten the texts before saving. No changes were stored.</target></trans-unit>
 <trans-unit id="storage_usage"><source>kanka_notices.storage_usage</source><target>Profile storage: %used% / %limit% UTF-8 bytes</target></trans-unit>
 <trans-unit id="no_translations"><source>kanka_notices.no_translations</source><target>No translations are enabled. Configure the required invoice language before assigning this profile.</target></trans-unit>
+<trans-unit id="use_customer"><source>kanka_notices.use_customer</source><target>Use each customer’s assigned profile</target></trans-unit>
+<trans-unit id="without_notices"><source>kanka_notices.without_notices</source><target>No notices for this invoice</target></trans-unit>
+<trans-unit id="invoice_override"><source>kanka_notices.invoice_override</source><target>Notice profile for this export</target></trans-unit>
+<trans-unit id="invoice_override_help"><source>kanka_notices.invoice_override_help</source><target>Applies to all invoices created from this selection. The customer default remains unchanged. Check the PDF preview before saving. Do not save an exception as your default search.</target></trans-unit>
+<trans-unit id="profile_unavailable"><source>kanka_notices.profile_unavailable</source><target>The selected notice profile is missing or its configuration is invalid. Ask an administrator to check Invoice Notices or choose another profile for this export.</target></trans-unit>
+<trans-unit id="profile_inactive"><source>kanka_notices.profile_inactive</source><target>Notice profile “%name%” is inactive. Reactivate it in Invoice Notices or select another profile for this export.</target></trans-unit>
+<trans-unit id="translation_missing"><source>kanka_notices.translation_missing</source><target>Notice profile “%name%” has no enabled translation for document language %language%. Add that translation in Invoice Notices or select an appropriate profile for this export.</target></trans-unit>
+<trans-unit id="snapshot_immutable"><source>kanka_notices.snapshot_immutable</source><target>The notices saved with this invoice cannot be changed. Create a corrected invoice through your normal accounting workflow.</target></trans-unit>
 </body></file></xliff>

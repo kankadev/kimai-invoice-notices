@@ -2,7 +2,7 @@
   "name": "kankadev/kimai-invoice-notices",
   "description": "Reusable multilingual notice profiles for native Kimai invoices",
   "type": "kimai-plugin",
-  "version": "0.1.0-dev",
+  "version": "1.0.0",
   "license": "AGPL-3.0-or-later",
   "homepage": "https://kanka.dev",
   "authors": [{"name": "Akay", "email": "mail@kanka.dev", "homepage": "https://kanka.dev"}],

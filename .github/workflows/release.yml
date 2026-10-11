@@ -1,0 +1,37 @@
+name: Release package
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring
+          coverage: none
+      - name: Check version and source
+        env:
+          RELEASE_TAG: '${{ github.ref_name }}'
+        run: |
+          python3 -c 'import json, os; assert os.environ["RELEASE_TAG"] == "v" + json.load(open("composer.json"))["version"]'
+          composer validate --no-check-publish
+          find Controller DependencyInjection EventSubscriber Exception Form Service Tests -name '*.php' -print0 | xargs -0 -n1 php -l
+          php -l KankaInvoiceNoticesBundle.php
+          php Tests/run.php
+      - run: python3 tools/package.py
+      - run: unzip -t dist/KankaInvoiceNoticesBundle-*.zip
+      - name: Publish versioned plugin archive
+        env:
+          GH_TOKEN: '${{ github.token }}'
+          RELEASE_TAG: '${{ github.ref_name }}'
+        run: gh release create "$RELEASE_TAG" dist/*.zip dist/*.zip.sha256 --verify-tag --title "Invoice Notices $RELEASE_TAG" --notes-file CHANGELOG.md

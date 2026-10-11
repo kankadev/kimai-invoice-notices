@@ -2,7 +2,7 @@
 {% block page_title %}{{ 'kanka_notices.title'|trans }}{% endblock %}
 {% block main %}
 {% for message in app.flashes('notices_saved') %}<div class="alert alert-success" role="status">{{ message }}</div>{% endfor %}
-<div class="alert alert-warning">{{ 'kanka_notices.development'|trans }}</div>
+<div class="alert alert-info">{{ 'kanka_notices.template_setup'|trans }}</div>
 <div class="card"><div class="card-body">
     <h2 class="card-title">{{ 'kanka_notices.profiles'|trans }}</h2>
     <p>{{ 'kanka_notices.boundaries'|trans }}</p>

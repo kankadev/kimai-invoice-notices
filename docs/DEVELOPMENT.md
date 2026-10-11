@@ -1,43 +1,35 @@
-# Development status
+# Validation and development
 
-## First slice — 2026-10-11
+## Acceptance baseline — 2026-10-11
 
-Development preview `0.1.0-dev`, not a release. Installed only in an isolated Kimai 2.67.0 / PHP 8.3 test environment.
+Isolated Kimai 2.67.0 and 2.69.0 installations, PHP 8.3, dedicated synthetic database volumes, internal Docker networks and a mail catcher. Production was not changed and no message was sent. Private infrastructure/test-login helpers and company templates are intentionally excluded from this repository.
 
-Implemented: strict profile validation, a read-only configuration registry, native customer selection, a model hydrator exposing `invoice.kanka_notices`, and an English/German administrator overview at `/{locale}/invoice-notices/settings`. The overview uses Kimai's native components and has no write endpoint yet.
+- 26 standalone domain checks: strict schema, types, lengths, UTF-8, exact locale, inactive profiles, snapshot round trips/provenance/state/size.
+- 28 native checks: field registration/preservation, effective formatter locale, real Twig escaping, duplicate IDs, create/update/revisions, language discovery, stale saves, storage bound, native invoice create/save, original document hash, model freeze, status/reload preservation, protected metadata changes/removal/new injection, override rejection/no fallback, exception without customer mutation and protected-table hashes after rollback.
+- 6 native renderer sandbox checks: allowed pure function, denied source function and setter, no forbidden mutation, missing data and missing plugin fail explicitly.
+- HTTP acceptance: EN/DE administration, creation/editing, block order, explicit French, retained languages/input, success feedback, HTML escaping/inert Twig, malformed/absent CSRF, stale edit, field limits, restricted-role 403, native invoice selection/default/exception, forged choice rejection and invalid create token.
+- Private actual PDF-renderer acceptance: mixed hourly/fixed charges, absent notices, long blocks and long address; all pages visually reviewed, embedded Carlito, numbering, Unicode/currency, totals, footer spacing and no repeated tax footer. Texts were synthetic layout fixtures, not a legal review.
 
-The current registry reads its own configuration key. No legal profiles are shipped or enabled. Synthetic fixtures used by tests are transaction-scoped and rolled back; do not import real invoices or customer data into this repository.
+The source audit reviews permissions, bounded parsing, bound SQL/concurrency, plaintext rendering, sandbox and snapshot lifecycle. No source-supported vulnerability was found. This does not guarantee absence of every defect or certify legal texts. Native core boundaries were inspected separately. No full HTTP API mutation test is claimed; native save and API event-path inspection establish the protected path.
 
-Document language is taken from the invoice model's formatter. A template with a nullable language must not cause a type error or a fallback to the customer's email language. An exact translation is currently required, including locale variants. Unassigned profiles return an explicit `unassigned` state and empty notices; an explicitly empty profile returns `resolved`. The stricter final missing-profile policy remains open.
-
-Assigned inactive or missing profiles, corrupt configuration and missing translations fail explicitly. The final localized error/preview workflow is still to be built. This preview is not suitable for production invoice creation.
-
-The shared private invoice template has not been modified. PDF layout, historical snapshots, per-invoice overrides and supported-version coverage are pending. Stored PDFs remain untouched because this slice does not write invoices or handle history downloads.
-
-## Profile editor — 2026-10-11
-
-The administrator overview now links to native Symfony forms for creating and editing profiles. Stable identifiers are generated on creation and each successful save increments the revision. Languages are offered from aggregated customer/template usage, existing profile translations and explicit additions. Language sections require explicit activation; nonempty disabled content is rejected. Blocks can be added, removed and reordered before saving.
-
-Persistence uses the plugin's existing native configuration key, a database transaction, a locked read and a registry-wide revision token. Stale forms preserve their input and cannot overwrite a newer save. The current native TEXT storage requires a combined 60,000-byte UTF-8 limit, checked before writing; the overview shows usage. Dedicated larger storage, deletion, profile history and migrations remain future work.
-
-Current verified results: **20 domain checks and 14 native checks**. Native checks additionally cover profile creation/update, revision increments, language discovery, stale saves and storage-limit rejection. Transaction fixtures are rolled back and before/after hashes of customer, invoice and timesheet tables match.
-
-Actual HTTP checks cover create/update, DE/EN content, explicitly added French, block ordering, escaped HTML and inert Twig-like text, visible save confirmation, missing/invalid CSRF tokens, stale submissions with retained input, disabled translations containing text, malformed revision tokens, field-length validation and language retention. A restricted fixture user receives 403 on overview, create and edit routes. German labels and native customer dropdown choices were checked. These HTTP checks leave one synthetic active profile for manual testing; no customer record, invoice or timesheet was saved and no mail was sent.
-
-PHP syntax, both Twig templates, both XLIFF translations and Composer metadata pass validation. These checks are not visual PDF acceptance or proof of compatibility with Kimai 2.69.0. The installation-private HTTP harness is not yet a portable public integration suite.
-
-## Tests
-
-Run domain checks with PHP 8.2 or later and mbstring:
+## Running checks
 
 ```sh
 php Tests/run.php
 ```
 
-`Tests/native.php` requires a complete isolated Kimai installation at `/opt/kimai` with the dedicated `kimai_stage` fixture database. It refuses other database configurations, boots the actual kernel, and runs configuration fixtures inside a transaction that is always rolled back. It checks native field registration, selected-ID preservation, actual Twig escaping, document language, duplicate identifiers, inactive assignments, and unchanged customer/invoice/timesheet tables. Never run it against production.
+Within a **genuinely isolated** Kimai installation at `/opt/kimai`, containing synthetic customer/user/template fixtures and the database named `kimai_stage`:
 
-The native check uses the compiled Twig service factory only to access the actual test-kernel renderer; it does not change service visibility. This harness may need adjustment for a different Symfony build.
+```sh
+php var/plugins/KankaInvoiceNoticesBundle/Tests/native.php
+php var/plugins/KankaInvoiceNoticesBundle/Tests/sandbox.php
+php bin/console lint:twig var/plugins/KankaInvoiceNoticesBundle/Resources/views --env=prod
+```
 
-Verified results: 17 domain checks; 9 native checks; kernel compilation; hydrator autoconfiguration; Twig syntax; both XLIFF files; authenticated English/German overview and customer form; anonymous access redirected to login; POST to the read-only overview rejected with 405. No customer save, invoice creation, or mail delivery was performed.
+Never run native tests against production. The database-name guard is a safeguard, not proof of isolation. `native.php` uses rollback transactions, randomly named temporary documents and protected-table fingerprints; its artificial JSON renderer tests persistence, not PDF layout. `sandbox.php` uses the actual native Twig renderer without database writes. Actual PDF acceptance is a separate operator check with the installation's private template.
 
-The deployment and HTTP fixture-login helpers remain installation-private. A portable CI/integration harness and full security acceptance are still required before release.
+The compiled container service factories give the test harness access to private native services; they do not change public service visibility. A different Symfony host build may require harness adjustment. Public CI runs domain, syntax and metadata checks. Native HTTP/PDF acceptance needs a real isolated installation and is not implied by the public source checks.
+
+## Release review
+
+Use the normal Kimai plugin directory and cache clear for installation. Package only explicitly maintained public plugin files; exclude private fixtures, credentials, customer/issuer data and exports. Review staged changes and run secret scanning before committing. Test the extracted release archive in staging, verify its checksums and rerun acceptance after changes that affect behavior or layout.

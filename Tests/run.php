@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require __DIR__.'/../Service/Profile.php';
 require __DIR__.'/../Service/NoticeResolver.php';
+require __DIR__.'/../Service/SnapshotCodec.php';
 
 use KimaiPlugin\KankaInvoiceNoticesBundle\Service\Profile;
 use KimaiPlugin\KankaInvoiceNoticesBundle\Service\NoticeResolver;
@@ -52,4 +53,17 @@ $many = $data; $many['translations']['de']['blocks'] = array_fill(0, 21, ['title
 rejects(fn () => Profile::fromArray($many), 'Explanation block limit');
 $invalidUtf8 = $data; $invalidUtf8['translations']['de']['short'] = "\xFF";
 rejects(fn () => Profile::fromArray($invalidUtf8), 'Invalid UTF-8 rejected');
+$codec = new KimaiPlugin\KankaInvoiceNoticesBundle\Service\SnapshotCodec();
+$notice = $resolver->resolve($profile, 'de');
+$encoded = $codec->encode($notice, 'example.pdf.twig', str_repeat('a', 64));
+check($codec->decode($encoded)['notices'] === $notice, 'Snapshot round trip preserves exact notices');
+$unassigned = $resolver->resolve(null, 'en');
+check($codec->decode($codec->encode($unassigned, 'example', str_repeat('b', 64)))['notices'] === $unassigned, 'Unassigned snapshot differs from resolved empty notices');
+$badNotice = $notice; $badNotice['unexpected'] = true;
+rejects(fn () => $codec->validate($badNotice), 'Unknown snapshot fields rejected');
+$badNotice = $unassigned; $badNotice['short'] = 'Unexpected text';
+rejects(fn () => $codec->validate($badNotice), 'Unassigned snapshots cannot contain text');
+rejects(fn () => $codec->encode($notice, 'example', 'not-a-hash'), 'Invalid document hash rejected');
+$oversize = $notice; $oversize['blocks'] = array_fill(0, 7, ['title' => '', 'text' => str_repeat('x', 10000)]);
+rejects(fn () => $codec->encode($oversize, 'example', str_repeat('a', 64)), 'Snapshot storage limit');
 echo $checks." domain checks passed.\n";

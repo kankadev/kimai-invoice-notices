@@ -21,3 +21,5 @@ jobs:
       - run: find Controller DependencyInjection EventSubscriber Exception Form Service Tests -name '*.php' -print0 | xargs -0 -n1 php -l
       - run: php -l KankaInvoiceNoticesBundle.php
       - run: php Tests/run.php
+      - run: python3 tools/package.py
+      - run: unzip -t dist/KankaInvoiceNoticesBundle-*.zip

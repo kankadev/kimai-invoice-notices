@@ -7,3 +7,10 @@ services:
         exclude:
             - '../../{DependencyInjection,Exception,Resources,Tests,docs,tools,KankaInvoiceNoticesBundle.php}'
             - '../../Service/Profile.php'
+    KimaiPlugin\KankaInvoiceNoticesBundle\Service\NoticeSandboxPolicy:
+        arguments:
+            $inner: '@App\Twig\SecurityPolicy\StrictPolicy'
+    Twig\Extension\SandboxExtension:
+        arguments:
+            $policy: '@KimaiPlugin\KankaInvoiceNoticesBundle\Service\NoticeSandboxPolicy'
+        tags: ['twig.extension']

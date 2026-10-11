@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2"><file source-language="en" target-language="en" datatype="plaintext" original="messages"><body>
+<trans-unit id="title"><source>kanka_notices.title</source><target>Invoice Notices</target></trans-unit>
+<trans-unit id="development"><source>kanka_notices.development</source><target>Development preview: profiles are currently read-only. Do not use this build in production.</target></trans-unit>
+<trans-unit id="profiles"><source>kanka_notices.profiles</source><target>Notice profiles</target></trans-unit>
+<trans-unit id="boundaries"><source>kanka_notices.boundaries</source><target>Notices explain your invoice. They do not calculate taxes, discounts or invoice amounts.</target></trans-unit>
+<trans-unit id="revision"><source>kanka_notices.revision</source><target>Revision</target></trans-unit>
+<trans-unit id="active"><source>kanka_notices.active</source><target>Active</target></trans-unit>
+<trans-unit id="inactive"><source>kanka_notices.inactive</source><target>Inactive</target></trans-unit>
+<trans-unit id="missing"><source>kanka_notices.missing</source><target>Missing profile</target></trans-unit>
+<trans-unit id="unassigned"><source>kanka_notices.unassigned</source><target>No profile selected</target></trans-unit>
+<trans-unit id="customer_profile"><source>kanka_notices.customer_profile</source><target>Invoice notice profile</target></trans-unit>
+<trans-unit id="customer_help"><source>kanka_notices.customer_help</source><target>Select a profile for this customer's invoices. The invoice template must support notice variables. Selection does not certify tax treatment.</target></trans-unit>
+<trans-unit id="empty"><source>kanka_notices.empty</source><target>No notice profiles have been configured.</target></trans-unit>
+<trans-unit id="developer"><source>kanka_notices.developer</source><target>Developed by Akay —</target></trans-unit>
+<trans-unit id="documentation"><source>kanka_notices.documentation</source><target>Documentation</target></trans-unit>
+</body></file></xliff>

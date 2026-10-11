@@ -1,0 +1,3 @@
+kanka_invoice_notices:
+    resource: '../../Controller/'
+    type: attribute

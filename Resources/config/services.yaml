@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    KimaiPlugin\KankaInvoiceNoticesBundle\:
+        resource: '../../*'
+        exclude:
+            - '../../{DependencyInjection,Resources,Tests,docs,tools,KankaInvoiceNoticesBundle.php}'
+            - '../../Service/Profile.php'

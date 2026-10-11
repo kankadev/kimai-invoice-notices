@@ -1,6 +1,17 @@
 # Roadmap
 
-This is a planning backlog, not a list of implemented features.
+Target backlog. Checked items have implementation evidence; unchecked items remain open.
+
+## First development slice — 2026-10-11
+
+- [x] Native bundle registration, read-only administrator overview, English/German labels.
+- [x] Validated plain-text profile model with stable identifiers and ordered blocks.
+- [x] Native customer choice field; re-registration preserves the selected identifier.
+- [x] Invoice-model hydrator uses the effective document formatter locale.
+- [x] Missing translations and inactive/missing selected profiles do not silently resolve.
+- [x] 17 domain checks and 9 native integration checks in isolated Kimai 2.67.0 / PHP 8.3.
+- [x] German/English HTTP overview, login guard, read-only method restriction and customer field checked.
+- [ ] Profile editor, language discovery, snapshots, PDF placement and Kimai 2.69 compatibility.
 
 ## Before implementation
 

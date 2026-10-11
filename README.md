@@ -2,7 +2,7 @@
 
 Reusable, multilingual notice profiles for customer invoices — by [kanka.dev](https://kanka.dev).
 
-**Status: planning.** This repository currently contains the project specification, not an installable plugin. No release or supported Kimai version has been declared.
+**Status: early development preview.** The first implementation provides validated profiles, native customer selection, invoice-model integration, and a read-only overview. Profile editing and historical snapshots are not implemented. Do not install this build in production. No stable release or general compatibility guarantee has been declared.
 
 Invoice Notices is designed to let administrators maintain invoice explanations centrally, select a profile on each customer, and display its texts through an existing native Kimai invoice template. Profiles can contain tax explanations or other informational notices. The plugin will not calculate taxes, apply discounts, change invoice amounts, or send emails.
 
@@ -30,7 +30,7 @@ See [the design specification](docs/DESIGN.md), [the roadmap](TODO.md), and [the
 
 ## Development
 
-Implementation and compatibility testing have not started. The design will be validated against Kimai's native customer metadata and invoice-model extension points before coding. A public release requires automated checks and actual PDF rendering in an isolated environment with synthetic data.
+The first slice was checked in an isolated Kimai 2.67.0 / PHP 8.3 installation: 17 domain checks, 9 native integration checks, German/English HTTP responses, login protection, native customer metadata, Twig escaping, and translated labels. Production-version compatibility and actual invoice PDF rendering are still pending. See [development status and test instructions](docs/DEVELOPMENT.md).
 
 Customer records, installation-specific legal texts, private invoice templates, signatures, credentials, and production exports do not belong in this repository.
 

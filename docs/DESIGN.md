@@ -1,6 +1,6 @@
 # Design specification
 
-Status: proposed design; no implementation or deployment.
+Status: target design. The first read-only slice is implemented and installed only in an isolated test environment; see DEVELOPMENT.md for verified behavior and remaining work.
 
 ## Architecture
 

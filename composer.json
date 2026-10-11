@@ -1,0 +1,12 @@
+{
+  "name": "kankadev/kimai-invoice-notices",
+  "description": "Reusable multilingual notice profiles for native Kimai invoices",
+  "type": "kimai-plugin",
+  "version": "0.1.0-dev",
+  "license": "AGPL-3.0-or-later",
+  "homepage": "https://kanka.dev",
+  "authors": [{"name": "Akay", "email": "mail@kanka.dev", "homepage": "https://kanka.dev"}],
+  "require": {"php": ">=8.2", "ext-mbstring": "*", "ext-json": "*"},
+  "extra": {"kimai": {"require": 26700, "name": "Invoice Notices — by kanka.dev"}},
+  "autoload": {"psr-4": {"KimaiPlugin\\KankaInvoiceNoticesBundle\\": ""}}
+}

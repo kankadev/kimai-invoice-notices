@@ -1,0 +1,23 @@
+name: Source checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.2', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php }}'
+          extensions: mbstring
+          coverage: none
+      - run: composer validate --no-check-publish
+      - run: find Controller DependencyInjection EventSubscriber Service Tests -name '*.php' -print0 | xargs -0 -n1 php -l
+      - run: php -l KankaInvoiceNoticesBundle.php
+      - run: php Tests/run.php

@@ -2,7 +2,7 @@
 
 Zentral gepflegte, mehrsprachige Hinweisprofile für Rechnungen — von **Akay, kanka.dev**.
 
-**Stand: Planung.** Es gibt noch kein installierbares Plugin und keine freigegebene Version.
+**Stand: frühe Entwicklungsvorschau.** Profilstruktur, native Kundenauswahl, Rechnungsmodell-Anbindung und eine nur lesbare Übersicht sind implementiert. Profilbearbeitung, historische Snapshots und PDF-Abnahme stehen aus. Keine freigegebene Version; nicht produktiv installieren.
 
 Administratoren sollen Profile mit einem kurzen Rechnungshinweis und ausführlicheren, sortierbaren Textblöcken anlegen können. Beim Kunden wird ein Profil ausgewählt. Die vorhandene native Rechnungsvorlage gibt die bereitgestellten Texte an den gewünschten Stellen aus.
 
@@ -12,6 +12,6 @@ Das Plugin berechnet keine Steuern oder Rabatte und verändert keine Rechnungsbe
 
 Invoice Mail bleibt unabhängig. Auch externe Angebote benötigen zunächst weder eine API-Verbindung noch einen vorher angelegten Kimai-Kunden. Eine spätere Profil-Schnittstelle bleibt optional.
 
-Details: [Entwurf](DESIGN.md), [Aufgaben](../TODO.md), [englische Projektbeschreibung](../README.md).
+Details: [Entwurf](DESIGN.md), [Entwicklungsstand und Tests](DEVELOPMENT.md), [Aufgaben](../TODO.md), [englische Projektbeschreibung](../README.md).
 
 Kontakt: [mail@kanka.dev](mailto:mail@kanka.dev). Lizenz: AGPL-3.0-or-later.

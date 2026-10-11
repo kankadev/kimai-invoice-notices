@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'kanka_notices.title'|trans }}{% endblock %}
+{% block main %}
+<div class="alert alert-warning">{{ 'kanka_notices.development'|trans }}</div>
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="card mb-3"><div class="card-body">
+    <h2 class="card-title">{{ (profile ? 'kanka_notices.edit' : 'kanka_notices.new')|trans }}</h2>
+    {{ form_row(form.name) }}{{ form_row(form.description) }}{{ form_row(form.active) }}
+    {% if profile %}<p>{{ profile.id }} · {{ 'kanka_notices.revision'|trans }} {{ profile.revision }}</p>{% endif %}
+</div></div>
+<div class="alert alert-info">{{ 'kanka_notices.languages_help'|trans }}</div>
+{% for code, counts in sections %}
+{% set content = attribute(form, 'lang_' ~ code) %}
+<div class="card mb-3"><div class="card-body">
+    <h3>{{ code|language_name }} ({{ code }})</h3>
+    <p class="text-secondary">{{ 'kanka_notices.language_sources'|trans({'%customers%': counts.customer, '%templates%': counts.template, '%profiles%': counts.configured}) }}</p>
+    {{ form_errors(content) }}
+    {{ form_row(content.enabled) }}{{ form_row(content.short) }}
+    {% for block in content.blocks %}
+    <div class="border rounded p-3 mb-3">
+        {{ form_row(block.title) }}{{ form_row(block.text) }}
+        <button type="submit" name="action" value="up:{{ code }}:{{ loop.index0 }}" class="btn btn-outline-secondary"{% if loop.first %} disabled{% endif %}>{{ 'kanka_notices.up'|trans }}</button>
+        <button type="submit" name="action" value="down:{{ code }}:{{ loop.index0 }}" class="btn btn-outline-secondary"{% if loop.last %} disabled{% endif %}>{{ 'kanka_notices.down'|trans }}</button>
+        <button type="submit" name="action" value="remove:{{ code }}:{{ loop.index0 }}" class="btn btn-outline-danger">{{ 'kanka_notices.remove'|trans }}</button>
+    </div>
+    {% endfor %}
+    {% do content.blocks.setRendered %}
+    <button type="submit" name="action" value="add:{{ code }}" class="btn btn-outline-primary"{% if content.blocks|length >= 20 %} disabled{% endif %}>{{ 'kanka_notices.add_block'|trans }}</button>
+</div></div>
+{% endfor %}
+<div class="card mb-3"><div class="card-body">
+    {{ form_row(form.additional_language) }}
+    <button type="submit" name="action" value="language" class="btn btn-outline-primary">{{ 'kanka_notices.add_language'|trans }}</button>
+</div></div>
+<button type="submit" name="action" value="save" class="btn btn-primary">{{ 'kanka_notices.save'|trans }}</button>
+<a class="btn btn-outline-secondary" href="{{ path('kanka_invoice_notices_settings') }}">{{ 'kanka_notices.cancel'|trans }}</a>
+{{ form_end(form) }}
+{% endblock %}

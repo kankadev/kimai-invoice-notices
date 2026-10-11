@@ -47,4 +47,9 @@ $markup = $data; $markup['translations']['de']['short'] = '<script>alert(1)</scr
 check($resolver->resolve(Profile::fromArray($markup), 'de')['short'] === $markup['translations']['de']['short'], 'Content remains inert text');
 $empty = $data; $empty['translations']['de'] = ['short' => '', 'blocks' => []];
 check($resolver->resolve(Profile::fromArray($empty), 'de')['status'] === 'resolved', 'Explicit empty profile differs from unassigned');
+check($profile->toArray() === $data, 'Profile serialization preserves the validated content');
+$many = $data; $many['translations']['de']['blocks'] = array_fill(0, 21, ['title' => '', 'text' => '']);
+rejects(fn () => Profile::fromArray($many), 'Explanation block limit');
+$invalidUtf8 = $data; $invalidUtf8['translations']['de']['short'] = "\xFF";
+rejects(fn () => Profile::fromArray($invalidUtf8), 'Invalid UTF-8 rejected');
 echo $checks." domain checks passed.\n";

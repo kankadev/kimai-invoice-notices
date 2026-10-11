@@ -5,5 +5,5 @@ services:
     KimaiPlugin\KankaInvoiceNoticesBundle\:
         resource: '../../*'
         exclude:
-            - '../../{DependencyInjection,Resources,Tests,docs,tools,KankaInvoiceNoticesBundle.php}'
+            - '../../{DependencyInjection,Exception,Resources,Tests,docs,tools,KankaInvoiceNoticesBundle.php}'
             - '../../Service/Profile.php'

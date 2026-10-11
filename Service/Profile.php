@@ -51,6 +51,12 @@ final class Profile
         return new self($data['id'], $data['name'], $data['description'], $data['active'], $data['revision'], $data['translations']);
     }
 
+    public function toArray(): array
+    {
+        return ['id' => $this->id, 'name' => $this->name, 'description' => $this->description,
+            'active' => $this->active, 'revision' => $this->revision, 'translations' => $this->translations];
+    }
+
     private static function keys(array $data, array $keys): void
     {
         $actual = array_keys($data);

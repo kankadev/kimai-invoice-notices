@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2"><file source-language="en" target-language="de" datatype="plaintext" original="messages"><body>
 <trans-unit id="title"><source>kanka_notices.title</source><target>Rechnungshinweise</target></trans-unit>
-<trans-unit id="development"><source>kanka_notices.development</source><target>Entwicklungsvorschau: Profile sind derzeit nur lesbar. Diese Version nicht produktiv einsetzen.</target></trans-unit>
+<trans-unit id="development"><source>kanka_notices.development</source><target>Entwicklungsvorschau: Historische Textstände und PDF-Abnahme stehen noch aus. Nicht produktiv einsetzen.</target></trans-unit>
 <trans-unit id="profiles"><source>kanka_notices.profiles</source><target>Hinweisprofile</target></trans-unit>
 <trans-unit id="boundaries"><source>kanka_notices.boundaries</source><target>Hinweise erläutern die Rechnung. Sie berechnen keine Steuern, Rabatte oder Rechnungsbeträge.</target></trans-unit>
 <trans-unit id="revision"><source>kanka_notices.revision</source><target>Revision</target></trans-unit>
@@ -14,4 +14,31 @@
 <trans-unit id="empty"><source>kanka_notices.empty</source><target>Es sind noch keine Hinweisprofile hinterlegt.</target></trans-unit>
 <trans-unit id="developer"><source>kanka_notices.developer</source><target>Entwickelt von Akay —</target></trans-unit>
 <trans-unit id="documentation"><source>kanka_notices.documentation</source><target>Dokumentation</target></trans-unit>
+<trans-unit id="new"><source>kanka_notices.new</source><target>Profil anlegen</target></trans-unit>
+<trans-unit id="edit"><source>kanka_notices.edit</source><target>Profil bearbeiten</target></trans-unit>
+<trans-unit id="name"><source>kanka_notices.name</source><target>Profilname</target></trans-unit>
+<trans-unit id="description"><source>kanka_notices.description</source><target>Verwendungszweck und Anwendbarkeit</target></trans-unit>
+<trans-unit id="block_title"><source>kanka_notices.block_title</source><target>Blocküberschrift</target></trans-unit>
+<trans-unit id="block_text"><source>kanka_notices.block_text</source><target>Erklärungstext</target></trans-unit>
+<trans-unit id="translation_enabled"><source>kanka_notices.translation_enabled</source><target>Diese Übersetzung bereitstellen (leere Hinweise sind erlaubt)</target></trans-unit>
+<trans-unit id="short"><source>kanka_notices.short</source><target>Kurzer Hinweis unter der Rechnungssumme</target></trans-unit>
+<trans-unit id="additional_language"><source>kanka_notices.additional_language</source><target>Zusätzliche Inhaltssprache</target></trans-unit>
+<trans-unit id="choose_language"><source>kanka_notices.choose_language</source><target>Sprache auswählen</target></trans-unit>
+<trans-unit id="add_language"><source>kanka_notices.add_language</source><target>Sprache zum Formular hinzufügen</target></trans-unit>
+<trans-unit id="add_block"><source>kanka_notices.add_block</source><target>Erklärungsblock hinzufügen</target></trans-unit>
+<trans-unit id="up"><source>kanka_notices.up</source><target>Nach oben</target></trans-unit>
+<trans-unit id="down"><source>kanka_notices.down</source><target>Nach unten</target></trans-unit>
+<trans-unit id="remove"><source>kanka_notices.remove</source><target>Block entfernen</target></trans-unit>
+<trans-unit id="save"><source>kanka_notices.save</source><target>Profil speichern</target></trans-unit>
+<trans-unit id="cancel"><source>kanka_notices.cancel</source><target>Zur Profilübersicht</target></trans-unit>
+<trans-unit id="saved"><source>kanka_notices.saved</source><target>Profil „%name%“ gespeichert.</target></trans-unit>
+<trans-unit id="conflict"><source>kanka_notices.conflict</source><target>Ein anderer Administrator hat die Profile geändert. Deine Eingaben bleiben erhalten. Übertrage deine Änderungen in das aktuelle Formular in einem neuen Tab; dieses veraltete Formular überschreibt den neueren Stand nicht.</target></trans-unit>
+<trans-unit id="invalid"><source>kanka_notices.invalid</source><target>Das Profil konnte nicht gespeichert werden. Prüfe Textlängen, Pflichtfelder und die Anzahl der Blöcke.</target></trans-unit>
+<trans-unit id="storage_error"><source>kanka_notices.storage_error</source><target>Das Profil konnte wegen eines Speicherfehlers nicht gespeichert werden. Deine Eingaben bleiben erhalten. Bitte versuche es erneut oder kontaktiere den Administrator.</target></trans-unit>
+<trans-unit id="languages_help"><source>kanka_notices.languages_help</source><target>Sprachen stammen aus Kunden und Rechnungsvorlagen. Gepflegte Übersetzungen bleiben verfügbar. Weitere Sprachen kannst du unten hinzufügen. Hinzufügen und Sortieren von Blöcken speichert das Profil noch nicht; nutze zum Abschluss Profil speichern. Texte werden nicht automatisch übersetzt.</target></trans-unit>
+<trans-unit id="language_sources"><source>kanka_notices.language_sources</source><target>Kunden: %customers% · Rechnungsvorlagen: %templates% · Profile mit Text: %profiles%</target></trans-unit>
+<trans-unit id="enable_translation"><source>kanka_notices.enable_translation</source><target>Für diese Sprache ist Text eingetragen. Aktiviere die Übersetzung oder leere ihre Texte vor dem Speichern; eingegebener Text wird nicht still verworfen.</target></trans-unit>
+<trans-unit id="storage_limit"><source>kanka_notices.storage_limit</source><target>Die Profile überschreiten die aktuelle Speichergrenze von 60.000 UTF-8-Bytes. Kürze die Texte vor dem Speichern. Es wurden keine Änderungen gespeichert.</target></trans-unit>
+<trans-unit id="storage_usage"><source>kanka_notices.storage_usage</source><target>Profilspeicher: %used% / %limit% UTF-8-Bytes</target></trans-unit>
+<trans-unit id="no_translations"><source>kanka_notices.no_translations</source><target>Keine Übersetzung aktiviert. Hinterlege die benötigte Rechnungssprache, bevor du dieses Profil zuordnest.</target></trans-unit>
 </body></file></xliff>

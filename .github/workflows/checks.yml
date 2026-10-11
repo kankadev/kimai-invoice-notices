@@ -18,6 +18,6 @@ jobs:
           extensions: mbstring
           coverage: none
       - run: composer validate --no-check-publish
-      - run: find Controller DependencyInjection EventSubscriber Service Tests -name '*.php' -print0 | xargs -0 -n1 php -l
+      - run: find Controller DependencyInjection EventSubscriber Exception Form Service Tests -name '*.php' -print0 | xargs -0 -n1 php -l
       - run: php -l KankaInvoiceNoticesBundle.php
       - run: php Tests/run.php

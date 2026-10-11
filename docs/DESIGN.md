@@ -1,6 +1,6 @@
 # Design specification
 
-Status: target design. The first read-only slice is implemented and installed only in an isolated test environment; see DEVELOPMENT.md for verified behavior and remaining work.
+Status: target design. Profile administration and the foundation are implemented only in an isolated test environment; see DEVELOPMENT.md for verified behavior and remaining work.
 
 ## Architecture
 

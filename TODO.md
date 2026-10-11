@@ -11,7 +11,10 @@ Target backlog. Checked items have implementation evidence; unchecked items rema
 - [x] Missing translations and inactive/missing selected profiles do not silently resolve.
 - [x] 17 domain checks and 9 native integration checks in isolated Kimai 2.67.0 / PHP 8.3.
 - [x] German/English HTTP overview, login guard, read-only method restriction and customer field checked.
-- [ ] Profile editor, language discovery, snapshots, PDF placement and Kimai 2.69 compatibility.
+- [x] Profile editor, content-language discovery, explicit language addition and retained languages.
+- [x] Native form validation, CSRF, restricted-role access, stale-edit rejection and storage limits.
+- [x] Current test totals: 20 domain checks and 14 native integration checks; HTTP editor acceptance.
+- [ ] Historical snapshots, PDF placement and Kimai 2.69 compatibility.
 
 ## Before implementation
 
@@ -23,10 +26,10 @@ Target backlog. Checked items have implementation evidence; unchecked items rema
 
 ## First implementation
 
-- [ ] Profile administration with English/German interface translations.
-- [ ] Localized short notices and ordered long blocks.
-- [ ] Customer profile selection through native metadata.
-- [ ] Language discovery, explicit language addition, and missing-translation guidance.
+- [x] Profile administration with English/German interface translations.
+- [x] Localized short notices and ordered long blocks.
+- [x] Customer profile selection through native metadata.
+- [x] Language discovery, explicit language addition, and missing-translation guidance.
 - [ ] Native invoice model integration and example template instructions.
 - [ ] Validation, authorization, concurrency checks, and optional explicit consistency constraints.
 - [ ] Automated tests and isolated renderer acceptance with synthetic fixtures.

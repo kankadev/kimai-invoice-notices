@@ -12,7 +12,19 @@ Document language is taken from the invoice model's formatter. A template with a
 
 Assigned inactive or missing profiles, corrupt configuration and missing translations fail explicitly. The final localized error/preview workflow is still to be built. This preview is not suitable for production invoice creation.
 
-The shared private invoice template has not been modified. PDF layout, historical snapshots, per-invoice overrides, editable profiles, language discovery and supported-version coverage are pending. Stored PDFs remain untouched because this slice does not write invoices or handle history downloads.
+The shared private invoice template has not been modified. PDF layout, historical snapshots, per-invoice overrides and supported-version coverage are pending. Stored PDFs remain untouched because this slice does not write invoices or handle history downloads.
+
+## Profile editor — 2026-10-11
+
+The administrator overview now links to native Symfony forms for creating and editing profiles. Stable identifiers are generated on creation and each successful save increments the revision. Languages are offered from aggregated customer/template usage, existing profile translations and explicit additions. Language sections require explicit activation; nonempty disabled content is rejected. Blocks can be added, removed and reordered before saving.
+
+Persistence uses the plugin's existing native configuration key, a database transaction, a locked read and a registry-wide revision token. Stale forms preserve their input and cannot overwrite a newer save. The current native TEXT storage requires a combined 60,000-byte UTF-8 limit, checked before writing; the overview shows usage. Dedicated larger storage, deletion, profile history and migrations remain future work.
+
+Current verified results: **20 domain checks and 14 native checks**. Native checks additionally cover profile creation/update, revision increments, language discovery, stale saves and storage-limit rejection. Transaction fixtures are rolled back and before/after hashes of customer, invoice and timesheet tables match.
+
+Actual HTTP checks cover create/update, DE/EN content, explicitly added French, block ordering, escaped HTML and inert Twig-like text, visible save confirmation, missing/invalid CSRF tokens, stale submissions with retained input, disabled translations containing text, malformed revision tokens, field-length validation and language retention. A restricted fixture user receives 403 on overview, create and edit routes. German labels and native customer dropdown choices were checked. These HTTP checks leave one synthetic active profile for manual testing; no customer record, invoice or timesheet was saved and no mail was sent.
+
+PHP syntax, both Twig templates, both XLIFF translations and Composer metadata pass validation. These checks are not visual PDF acceptance or proof of compatibility with Kimai 2.69.0. The installation-private HTTP harness is not yet a portable public integration suite.
 
 ## Tests
 

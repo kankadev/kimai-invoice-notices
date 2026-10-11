@@ -1,20 +1,25 @@
 {% extends 'base.html.twig' %}
 {% block page_title %}{{ 'kanka_notices.title'|trans }}{% endblock %}
 {% block main %}
+{% for message in app.flashes('notices_saved') %}<div class="alert alert-success" role="status">{{ message }}</div>{% endfor %}
 <div class="alert alert-warning">{{ 'kanka_notices.development'|trans }}</div>
 <div class="card"><div class="card-body">
     <h2 class="card-title">{{ 'kanka_notices.profiles'|trans }}</h2>
     <p>{{ 'kanka_notices.boundaries'|trans }}</p>
+    <p class="text-secondary">{{ 'kanka_notices.storage_usage'|trans({'%used%': usage, '%limit%': limit}) }}</p>
+    <a class="btn btn-primary mb-3" href="{{ path('kanka_invoice_notices_new') }}">{{ 'kanka_notices.new'|trans }}</a>
     {% for profile in profiles %}
     <div class="border rounded p-3 mb-3">
         <h3>{{ profile.name }}</h3>
         <p>{{ profile.description }}</p>
         <p>{{ profile.id }} · {{ 'kanka_notices.revision'|trans }} {{ profile.revision }} · {{ (profile.active ? 'kanka_notices.active' : 'kanka_notices.inactive')|trans }}</p>
+        <a class="btn btn-outline-primary mb-3" href="{{ path('kanka_invoice_notices_edit', {'id': profile.id}) }}">{{ 'kanka_notices.edit'|trans }}</a>
         {% for language, content in profile.translations %}
         <h4>{{ language|language_name }} ({{ language }})</h4>
         <p>{{ content.short|nl2br }}</p>
         {% for block in content.blocks %}<h5>{{ block.title }}</h5><p>{{ block.text|nl2br }}</p>{% endfor %}
         {% endfor %}
+        {% if profile.translations is empty %}<p class="text-warning">{{ 'kanka_notices.no_translations'|trans }}</p>{% endif %}
     </div>
     {% else %}<p>{{ 'kanka_notices.empty'|trans }}</p>{% endfor %}
 </div></div>

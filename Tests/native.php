@@ -29,7 +29,7 @@ function fingerprint($db): string
 }
 $before = fingerprint($db);
 $config = new App\Configuration\ConfigurationService($em->getRepository(App\Entity\Configuration::class), new Symfony\Component\Cache\Adapter\ArrayAdapter());
-$registry = new KimaiPlugin\KankaInvoiceNoticesBundle\Service\ProfileRegistry($config);
+$registry = new KimaiPlugin\KankaInvoiceNoticesBundle\Service\ProfileRegistry($config, $em);
 $resolver = new KimaiPlugin\KankaInvoiceNoticesBundle\Service\NoticeResolver();
 $hydrator = new KimaiPlugin\KankaInvoiceNoticesBundle\Service\NoticeHydrator($registry, $resolver);
 $fixture = ['id' => 'synthetic-business', 'name' => 'Synthetic business notice', 'description' => 'Test only, no legal statement.', 'revision' => 1, 'active' => true, 'translations' => [
@@ -92,6 +92,25 @@ try {
     $subscriber->fields($event);
     verify(in_array('synthetic-business', $field->getOptions()['choices'], true), 'Assigned inactive profile remains visible');
     try { $hydrator->hydrate($model); throw new RuntimeException('Inactive profile rendered'); } catch (InvalidArgumentException) { verify(true, 'Inactive profile does not silently render'); }
+    $writeData = $fixture;
+    unset($writeData['id'], $writeData['revision']);
+    $writeData['active'] = true;
+    $saved = $registry->save(null, $writeData, $registry->token());
+    verify($saved->revision === 1 && $registry->get($saved->id)->name === $fixture['name'], 'Native profile creation persisted');
+    $staleToken = $registry->token();
+    $writeData['name'] = 'Updated synthetic profile';
+    $updated = $registry->save($saved->id, $writeData, $staleToken);
+    verify($updated->id === $saved->id && $updated->revision === 2 && $registry->get($updated->id)->name === $writeData['name'], 'Update preserves identifier and increments revision');
+    $localeService = new App\Configuration\LocaleService(['en' => App\Configuration\LocaleService::DEFAULT_SETTINGS, 'de' => App\Configuration\LocaleService::DEFAULT_SETTINGS]);
+    $discovery = new KimaiPlugin\KankaInvoiceNoticesBundle\Service\ContentLanguages($em, $registry, $localeService);
+    $languages = $discovery->discover();
+    verify(isset($languages['de'], $languages['en']) && $languages['de']['configured'] === 2, 'Native language discovery includes configured profile languages');
+    try { $registry->save($updated->id, $writeData, $staleToken); throw new RuntimeException('Stale token accepted'); }
+    catch (KimaiPlugin\KankaInvoiceNoticesBundle\Exception\ProfileConflict) { verify($registry->get($updated->id)->revision === 2, 'Stale edit rejected without overwriting saved revision'); }
+    $oversized = $writeData;
+    $oversized['translations']['en']['blocks'] = array_fill(0, 7, ['title' => 'Long test block', 'text' => str_repeat('x', 10000)]);
+    try { $registry->save(null, $oversized, $registry->token()); throw new RuntimeException('Oversized configuration accepted'); }
+    catch (InvalidArgumentException $error) { verify($error->getMessage() === 'kanka_notices.storage_limit', 'Storage limit enforced before database truncation'); }
 } finally {
     $db->rollBack();
     $em->clear();
